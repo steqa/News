@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+    {% if news %}
+        {% for el in news %}
+            <div class="alert alert-check my-5 px-5">
+                <h3>{{ el.title }}</h3>
+                <p>{{ el.content|truncatechars:410 }}</p>
+                <a class="btn btn-outline-dark float-end" href="{{ el.get_absolute_url }}">Read more</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Новостей нет.</p>
+    {% endif %}
+{% endblock %}
