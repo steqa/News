@@ -1,4 +1,3 @@
-from unicodedata import name
 from django.db import models
 from django.urls import reverse
 
@@ -11,6 +10,7 @@ class News(models.Model):
     time_updated = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
     cat = models.ForeignKey('Category', on_delete=models.PROTECT)
+    country = models.ForeignKey('Country', on_delete=models.PROTECT) 
 
     def __str__(self):
         return self.title
@@ -24,8 +24,11 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-# class Country(models.Model):
-#     name = models.CharField(max_length=100)
+class Country(models.Model):
+    name = models.CharField(max_length=100)
 
-#     def __str__(self):
-#         return self.name
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('country', kwargs={'country_id': self.pk})

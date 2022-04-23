@@ -10,14 +10,14 @@
             {% if el.cat_id == 2 %}
                 <div class="alert alert-check my-5 px-5">
                     <p class="badge bg-danger text-wrap" style="width: 4rem;">Hot</p>
-                    <h3>{{ el.title }}</h3>
-                    <p>{{ el.content|truncatechars:410 }}</p>
+                    <a class="text-dark fw-bold fs-3 nav-link" href="{{ el.get_absolute_url }}">{{ el.title }}</a>
+                    <p>{{ el.content|truncatechars:470 }}</p>
                     <a class="btn btn-outline-dark float-end" href="{{ el.get_absolute_url }}">Read more</a>
                 </div>
             {% else %}
                 <div class="alert alert-check my-5 px-5">
-                    <h3>{{ el.title }}</h3>
-                    <p>{{ el.content|truncatechars:410 }}</p>
+                    <a class="text-dark fw-bold fs-3 nav-link" href="{{ el.get_absolute_url }}">{{ el.title }}</a>
+                    <p>{{ el.content|truncatechars:470 }}</p>
                     <a class="btn btn-outline-dark float-end" href="{{ el.get_absolute_url }}">Read more</a>
                 </div>
             {% endif %}
