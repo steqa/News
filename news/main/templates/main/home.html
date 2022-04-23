@@ -7,11 +7,20 @@
 {% block content %}
     {% if news %}
         {% for el in news %}
-            <div class="alert alert-check my-5 px-5">
-                <h3>{{ el.title }}</h3>
-                <p>{{ el.content|truncatechars:410 }}</p>
-                <a class="btn btn-outline-dark float-end" href="{{ el.get_absolute_url }}">Read more</a>
-            </div>
+            {% if el.cat_id == 2 %}
+                <div class="alert alert-check my-5 px-5">
+                    <p class="badge bg-danger text-wrap" style="width: 4rem;">Hot</p>
+                    <h3>{{ el.title }}</h3>
+                    <p>{{ el.content|truncatechars:410 }}</p>
+                    <a class="btn btn-outline-dark float-end" href="{{ el.get_absolute_url }}">Read more</a>
+                </div>
+            {% else %}
+                <div class="alert alert-check my-5 px-5">
+                    <h3>{{ el.title }}</h3>
+                    <p>{{ el.content|truncatechars:410 }}</p>
+                    <a class="btn btn-outline-dark float-end" href="{{ el.get_absolute_url }}">Read more</a>
+                </div>
+            {% endif %}
         {% endfor %}
     {% else %}
         <p>Новостей нет.</p>
