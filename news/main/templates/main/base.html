@@ -12,9 +12,9 @@
         <div class="container">
             <ul class="nav mb-2 justify-content-center mb-md-1">
                 {% if country_selected == 0 %}
-                    <li class="nav-link px-2 text-white text-decoration-underline">World</li>
+                    <li class="nav-link px-2 text-white text-decoration-underline">Мир</li>
                 {% else %}
-                    <li><a href="{% url 'home' %}" class="nav-link px-2 text-white">World</a></li>
+                    <li><a href="{% url 'home' %}" class="nav-link px-2 text-white">Мир</a></li>
                 {% endif %}
 
                 {% for c in country %}
