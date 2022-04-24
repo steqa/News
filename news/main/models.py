@@ -1,4 +1,3 @@
-from tabnanny import verbose
 from django.db import models
 from django.urls import reverse
 
@@ -23,6 +22,7 @@ class News(models.Model):
         verbose_name = 'Новости'
         verbose_name_plural = 'Новости'
         
+
 class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name="Категория")
 
@@ -32,6 +32,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
+
 
 class Country(models.Model):
     name = models.CharField(max_length=100, verbose_name="Локация")
