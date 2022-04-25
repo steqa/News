@@ -11,12 +11,13 @@ class News(models.Model):
     is_published = models.BooleanField(default=True, verbose_name="Публикация")
     cat = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name="Категория")
     country = models.ForeignKey('Country', on_delete=models.PROTECT, verbose_name="Локация")
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('news', kwargs={'news_id': self.pk})
+        return reverse('news', kwargs={'news_slug': self.slug})
     
     class Meta:
         verbose_name = 'Новости'
@@ -35,13 +36,14 @@ class Category(models.Model):
 
 
 class Country(models.Model):
-    name = models.CharField(max_length=100, verbose_name="Локация")
+    name = models.CharField(max_length=100, verbose_name="Локация", db_index=True)
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('country', kwargs={'country_id': self.pk})
+        return reverse('country', kwargs={'country_slug': self.slug})
 
     class Meta:
         verbose_name = 'Локация'

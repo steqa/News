@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from .models import *
 from django.http import HttpResponse
 
@@ -14,16 +14,24 @@ def home(request):
     return render(request, 'main/home.html', context)
 
 
-def show_news(request, news_id):
-    return HttpResponse(f"News with id = {news_id}")
-
-
-def show_country(request, country_id):
-    news = News.objects.filter(country_id=country_id)
+def show_news(request, news_slug):
+    news = get_object_or_404(News, slug=news_slug)
 
     context = {
         'news': news,
-        'country_selected': country_id,
+        'title': news.title,
+        'cat_selected': news.cat_id,
+    }
+
+    return render(request, 'main/news.html', context)
+
+
+def show_country(request, country_slug):
+    news = News.objects.filter(country__slug=country_slug)
+
+    context = {
+        'news': news,
+        'country_selected': country_slug,
     }
 
     return render(request, 'main/home.html', context)

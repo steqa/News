@@ -6,11 +6,13 @@ class NewsAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'country', 'time_created', 'photo', 'is_published', 'cat')
     list_display_links = ('id', 'title')
     search_fields = ('title', 'content')
+    prepopulated_fields = {"slug": ("title",)}
 
 class CountryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
     list_display_links = ('id', 'name')
     search_fields = ('id', 'name')
+    prepopulated_fields = {"slug": ("name",)}
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')

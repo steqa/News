@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <div class="my-5 px-5" style="margin-right: 100px; margin-left: 100px;">
+        <p class="fw-bold fs-3" style="text-align: center; margin-right: 150px; margin-left: 150px;">
+            {{ news.title }}
+        </p>
+
+        <img class="p-5" src="{{ news.photo.url }}" width="100%" height="100%">
+
+        <div class="p-2" style="text-align: justify; margin-right: 135px; margin-left: 135px;">
+            {{ news.content|linebreaks }}
+        </div>
+    </div>
+{% endblock %}
