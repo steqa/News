@@ -1,5 +1,6 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import *
+from .forms import *
 from django.http import HttpResponse
 
 # Create your views here.
@@ -35,3 +36,20 @@ def show_country(request, country_slug):
     }
 
     return render(request, 'main/home.html', context)
+
+
+def add_news(request):
+    if request.method == 'POST':
+        form = AddNewsForm(request.POST)
+        if form.is_valid():
+            # print(form.cleaned_data)
+            form.save()
+            return redirect('home')
+    else:
+        form = AddNewsForm()
+
+    context = {
+        'form': form
+    }
+    
+    return render(request, 'main/add_news.html', context)
