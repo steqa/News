@@ -5,7 +5,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def home(request):
-    news = News.objects.all()
+    news = News.objects.filter(is_published=True)
     context = {
         'news': news,
         'country_selected': 0,

@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-<a class="btn btn-outline-dark float-end" href="{% url 'add_news' %}">Добавить новость</a>
+<a class="btn btn-outline-dark float-end" href="{% url 'add_news' %}">Добавить новость</a><br>
     {% if news %}
         {% for el in news %}
             <div class="alert alert-check my-5 px-5 d-flex bd-highlight align-items-center" style="margin-right: 100px; margin-left: 100px;">
@@ -25,14 +25,14 @@
                     ></div>
                 {% endif %}
                 <div class="p-2 flex-shrink-1 bd-highlight">
-                    {% if el.cat_id == 2 %}
-                        <a class="text-dark fw-bold fs-5" style="text-decoration: none" href="{{ el.get_absolute_url }}"><span class="badge rounded-pill bg-danger" style="font-size: 12px">Горячо</span> {{ el.title }}</a>
-                    {% else %}
-                        <a class="text-dark fw-bold fs-5" style="text-decoration: none" href="{{ el.get_absolute_url }}">{{ el.title }}</a>
-                    {% endif %}
-                    <p style="text-align: justify">{{ el.content|truncatewords:40 }}</p>
+                    <a class="text-dark fw-bold fs-5" style="text-decoration: none" href="{{ el.get_absolute_url }}">{{ el.title }}</a>
+                    <p style="text-align: justify">{{ el.content|truncatewords:35 }}</p>
                     <a class="btn btn-outline-dark float-end" href="{{ el.get_absolute_url }}">Читать</a>
-                    <p class="text-black-50">{{ el.country }}<br>Дата публикации: {{ el.time_created|date:"d.m.Y H:i" }}</p>
+                    {% if el.cat_id == 2 %}
+                        <p class="text-black-50">{{ el.country }} <span class="badge rounded-pill bg-danger" style="font-size: 12px">Горячо</span><br>Дата публикации: {{ el.time_created|date:"d.m.Y H:i" }}</p>
+                    {% else %}
+                        <p class="text-black-50">{{ el.country }}<br>Дата публикации: {{ el.time_created|date:"d.m.Y H:i" }}</p>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}
