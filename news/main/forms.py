@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from .models import *
 
 class AddNewsForm(forms.ModelForm):
@@ -12,15 +13,23 @@ class AddNewsForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['country'].empty_label = "Выберите локацию"
         self.fields['cat'].empty_label = "Выберите категорию"
+        self.fields['photo'].empty_label = "Выберите фотографию"
 
     class Meta:
         model = News
-        fields = ['title', 'slug', 'content', 'country', 'cat', 'is_published']
+        fields = ['title', 'slug', 'content', 'photo', 'country', 'cat', 'is_published']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите заголовок статьи'}),
             'slug': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите URL-адресс статьи'}),
             'content': forms.Textarea(attrs={'rows': '5', 'class': 'form-control', 'placeholder': 'Введите текст статьи'}),
+            'photo': forms.FileInput(attrs={'class': 'form-control'}),
             'country': forms.Select(attrs={'class': 'form-select', 'id': 'countryvalidation',}),
             'cat': forms.Select(attrs={'class': 'form-select', 'id': 'catvalidation',}),
             'is_published': forms.CheckboxInput(attrs={'class': 'form-check-input', 'id': 'publishedvalidation'}),
         }
+
+    def clean_title(self):
+        title = self.cleaned_data['title']
+        if len(title) > 118:
+            raise ValidationError('Длина превышает 118 символов')
+        return title

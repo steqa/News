@@ -5,8 +5,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def home(request):
-    news = News.objects.order_by('-cat_id', '-id')
-
+    news = News.objects.all()
     context = {
         'news': news,
         'country_selected': 0,
@@ -40,7 +39,7 @@ def show_country(request, country_slug):
 
 def add_news(request):
     if request.method == 'POST':
-        form = AddNewsForm(request.POST)
+        form = AddNewsForm(request.POST, request.FILES)
         if form.is_valid():
             # print(form.cleaned_data)
             form.save()

@@ -7,6 +7,7 @@ class NewsAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'title')
     search_fields = ('title', 'content')
     prepopulated_fields = {"slug": ("title",)}
+    list_editable = ('is_published', 'cat')
 
 class CountryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
