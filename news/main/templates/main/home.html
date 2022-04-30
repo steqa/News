@@ -3,7 +3,6 @@
 
 {% block title %}
 Новости
-{% get_country as country %}
 {% for c in country %}
 {% if c.id == country_selected %}
 {{ c.name }}
@@ -12,7 +11,6 @@
 {% endblock %}
 
 {% block content %}
-<a class="btn btn-outline-dark float-end" href="{% url 'add_news' %}">Добавить новость</a><br>
     {% if news %}
         {% for el in news %}
             <div class="alert alert-check my-5 px-5 d-flex bd-highlight align-items-center" style="margin-right: 100px; margin-left: 100px;">
