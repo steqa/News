@@ -4,6 +4,8 @@ menu = [{'title': "Добавить новость", 'url_name': 'add_news'},
 ]
 
 class DataMixin:
+    paginate_by = 3
+    
     def get_user_context(self, **kwargs):
         context = kwargs
         country = Country.objects.all()

@@ -95,3 +95,13 @@ class AddNews(LoginRequiredMixin, DataMixin, CreateView):
 #     }
     
 #     return render(request, 'main/add_news.html', context)
+
+
+class RegisterUser(DataMixin, CreateView):
+    form_class = RegisterUserForm
+    template_name = 'main/register.html'
+    success_url = reverse_lazy('login')
+
+
+class LoginUser(DataMixin, ListView):
+    HttpResponse('')

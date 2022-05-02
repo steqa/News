@@ -29,8 +29,8 @@
                         <a class="text-dark fw-bold fs-5" style="text-decoration: none" href="{{ el.get_absolute_url }}">{{ el.title }}</a>
                     {% endif %}
                     <p style="text-align: justify">{{ el.content|truncatewords:35 }}</p>
-                    <a class="btn btn-outline-dark float-end" href="{{ el.get_absolute_url }}">Читать</a>
-                    <p class="text-black-50">{{ el.country }}<br>Дата публикации: {{ el.time_created|date:"d.m.Y H:i" }}</p>
+                    <a class="btn btn-outline-primary float-end" href="{{ el.get_absolute_url }}">Читать</a>
+                    <p class="text-primary">{{ el.country }}<br>Дата публикации: {{ el.time_created|date:"d.m.Y H:i" }}</p>
                 </div>
             </div>
         {% endfor %}
