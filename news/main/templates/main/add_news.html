@@ -5,59 +5,59 @@
 {% endblock %}
 
 {% block content %}
-<div class="my-4 px-5" style="margin-right: 100px; margin-left: 100px;">
-    <div style="text-align: justify; margin-right: 123px; margin-left: 123px;">
-        <div>
-            <h4 class="mb-4" style="text-align: center;">Публикация новости</h4>
-            <form action="{% url 'add_news' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}                
-                <div class="row g-3">
-                    <div>
-                        <label class="form-label" for="{{ form.title.id_for_label }}">{{ form.title.label }}: </label>{{ form.title }}
-                        <div class="text-danger">
-                          {{ form.title.errors }}
+    <div class="my-4 px-5" style="margin-right: 100px; margin-left: 100px;">
+        <div style="text-align: justify; margin-right: 123px; margin-left: 123px;">
+            <div>
+                <h4 class="mb-4" style="text-align: center;">Публикация новости</h4>
+                <form action="{% url 'add_news' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}                
+                    <div class="row g-3">
+                        <div>
+                            <label class="form-label" for="{{ form.title.id_for_label }}">{{ form.title.label }}: </label>{{ form.title }}
+                            <div class="text-danger">
+                              {{ form.title.errors }}
+                            </div>
+                        </div>  
+                        <div>
+                            <label class="form-label" for="{{ form.slug.id_for_label }}">{{ form.slug.label }}:</label>{{ form.slug }}
+                            <div class="text-danger">
+                                {{ form.slug.errors }}
+                            </div>
+                        </div>  
+                        <div>
+                            <label class="form-label" for="{{ form.content.id_for_label }}">{{ form.content.label }}:</label>{{ form.content }}
+                            <div class="text-danger">
+                                {{ form.content.errors }}
+                            </div>
                         </div>
-                    </div>  
-                    <div>
-                        <label class="form-label" for="{{ form.slug.id_for_label }}">{{ form.slug.label }}:</label>{{ form.slug }}
-                        <div class="text-danger">
-                            {{ form.slug.errors }}
+                        <div>
+                            <label class="form-label" for="{{ form.photo.id_for_label }}">{{ form.photo.label }}</label>{{ form.photo }}
+                            <div class="text-danger">
+                                {{ form.photo.errors }}
+                            </div>
                         </div>
-                    </div>  
-                    <div>
-                        <label class="form-label" for="{{ form.content.id_for_label }}">{{ form.content.label }}:</label>{{ form.content }}
-                        <div class="text-danger">
-                            {{ form.content.errors }}
+                        <div class="col-6">
+                            <label for="countryvalidation" class="form-label">{{ form.country.label }}:</label>{{ form.country }}
+                            <div class="text-danger">
+                                {{ form.country.errors }}
+                            </div>
                         </div>
+                        <div class="col-6">
+                            <label for="catvalidation" class="form-label">{{ form.cat.label }}:</label>{{ form.cat }}
+                            <div class="text-danger">
+                                {{ form.cat.errors }}
+                            </div>
+                        </div>  
+                        <div class="form-check">
+                            <label class="form-check-label" for="publishedvalidation">{{ form.is_published.label }}:</label> {{ form.is_published }}
+                            <div class="text-danger">
+                                {{ form.is_published.errors }}
+                            </div>
+                        </div>    
+                        <button class="w-100 btn btn-primary btn-lg" type="submit">Опубликовать</button>
                     </div>
-                    <div>
-                        <label class="form-label" for="{{ form.photo.id_for_label }}">{{ form.photo.label }}</label>{{ form.photo }}
-                        <div class="text-danger">
-                            {{ form.photo.errors }}
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <label for="countryvalidation" class="form-label">{{ form.country.label }}:</label>{{ form.country }}
-                        <div class="text-danger">
-                            {{ form.country.errors }}
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <label for="catvalidation" class="form-label">{{ form.cat.label }}:</label>{{ form.cat }}
-                        <div class="text-danger">
-                            {{ form.cat.errors }}
-                        </div>
-                    </div>  
-                    <div class="form-check">
-                        <label class="form-check-label" for="publishedvalidation">{{ form.is_published.label }}:</label> {{ form.is_published }}
-                        <div class="text-danger">
-                            {{ form.is_published.errors }}
-                        </div>
-                    </div>    
-                    <button class="w-100 btn btn-primary btn-lg" type="submit">Опубликовать</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

@@ -31,7 +31,14 @@
                     {% for m in menu %}
                         <li><a href="{% url 'add_news' %}" class="nav-link px-2 text-white">{{ m.title }}</a></li>
                     {% endfor %}
+
+                    {% if request.user.is_authenticated %}
+                        <li href="" class="nav-link px-2 text-white">{{ user.username }}</li>
+                        <li><a href="{% url 'logout' %}" class="nav-link px-2 text-white">Выйти</a></li>
+                    {% else %}
                         <li><a href="{% url 'register' %}" class="nav-link px-2 text-white">Регистрация</a></li>
+                        <li><a href="{% url 'login' %}" class="nav-link px-2 text-white">Вход</a></li>
+                    {% endif %}
                 </ul>
             </ul>
         </div>
@@ -48,6 +55,7 @@
                             </a>
                         </li>
                     {% endif %}
+                    
                     {% for p in paginator.page_range %}
                         {% if page_obj.number == p %}
                             <li class="page-item active" aria-current="page">
@@ -59,6 +67,7 @@
                             </li>
                         {% endif %}        
                     {% endfor %}
+
                     {% if page_obj.has_next %}
                         <li class="page-item">
                             <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">

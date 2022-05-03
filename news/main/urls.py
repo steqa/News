@@ -8,4 +8,5 @@ urlpatterns = [
     path('add-news', AddNews.as_view(), name='add_news'),
     path('register', RegisterUser.as_view(), name='register'),
     path('login', LoginUser.as_view(), name='login'),
+    path('logout', logout_user, name='logout'),
 ]

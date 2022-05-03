@@ -2,12 +2,12 @@
 {% load news_tags %}
 
 {% block title %}
-Новости
-{% for c in country %}
-{% if c.id == country_selected %}
-{{ c.name }}
-{% endif %}
-{% endfor %}
+    Новости
+    {% for c in country %}
+        {% if c.id == country_selected %}
+            {{ c.name }}
+        {% endif %}
+    {% endfor %}
 {% endblock %}
 
 {% block content %}

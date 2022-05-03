@@ -2,10 +2,16 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import logout, login
 from django.urls import reverse_lazy
 from .models import *
 from .forms import *
 from .utils import *
+
+
+menu = [{'title': "Добавить новость", 'url_name': 'add_news'},
+]
 
 # Create your views here.
 class NewsHome(DataMixin, ListView):
@@ -19,7 +25,12 @@ class NewsHome(DataMixin, ListView):
         return dict(list(context.items()) + list(c_def.items()))
 
     def get_queryset(self):
-        return News.objects.filter(is_published=True)
+        return News.objects.filter(is_published=True).select_related('country')
+        # news = cache.get('news')
+        # if not news:
+        #     news = News.objects.filter(is_published=True).select_related('country')
+        #     cache.set('news', news, 60)
+        # return news
 
 # def home(request):
 #     news = News.objects.filter(is_published=True)
@@ -61,7 +72,7 @@ class NewsCountry(DataMixin, ListView):
         return dict(list(context.items()) + list(c_def.items()))
 
     def get_queryset(self):
-        return News.objects.filter(country__slug=self.kwargs['country_slug'], is_published=True)
+        return News.objects.filter(country__slug=self.kwargs['country_slug'], is_published=True).select_related('country')
 
 # def show_country(request, country_slug):
 #     news = News.objects.filter(country__slug=country_slug)
@@ -102,6 +113,20 @@ class RegisterUser(DataMixin, CreateView):
     template_name = 'main/register.html'
     success_url = reverse_lazy('login')
 
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('home')
 
-class LoginUser(DataMixin, ListView):
-    HttpResponse('')
+
+class LoginUser(DataMixin, LoginView):
+    form_class = LoginUserForm
+    template_name = 'main/login.html'
+    
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('home')

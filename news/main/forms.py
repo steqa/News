@@ -1,7 +1,10 @@
 from collections import UserList
+from multiprocessing import AuthenticationError
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from captcha.fields import CaptchaField
 from .models import *
 
 class AddNewsForm(forms.ModelForm):
@@ -41,3 +44,10 @@ class RegisterUserForm(UserCreationForm):
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'username', 'placeholder': 'Логин'}))
     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control', 'id': 'password1', 'placeholder': 'Пароль'}))
     password2 = forms.CharField(label='Повтор пароля', widget=forms.PasswordInput(attrs={'class': 'form-control', 'id': 'password2', 'placeholder': 'Повтор пароля'}))
+    captcha = CaptchaField()
+    
+
+class LoginUserForm(AuthenticationForm):
+    username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'username', 'placeholder': 'Логин'}))
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control', 'id': 'password', 'placeholder': 'Пароль'}))
+    captcha = CaptchaField()
